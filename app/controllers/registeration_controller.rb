@@ -4,8 +4,9 @@ class RegisterationController < ApplicationController
   end
   def create
     @user = User.new(user_params)
-    if @user.save 
-      redirect_to root_path, notice: "logged in sucessfully!"
+    if @user.save
+      session[:user_id] = @user.id 
+      redirect_to root_path, notice: "Sucessfully create an account!"
     else 
       render :new, status: :unprocessable_entity #force hotwire to make form invalid
     end
